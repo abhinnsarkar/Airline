@@ -1,0 +1,31 @@
+@startuml mydiagram
+entity Customer {
+    * customer_id 
+    --
+    * first_name : text
+      middle_name : text
+    * last_name : text
+    * email : text
+      phone_number
+    * dob
+}
+
+entity Flight {
+    * flight_number
+    --
+    * route
+    * date
+    * departure_time
+}
+
+entity Ticket {
+    * ticketNumber
+    --
+    * customer : Customer
+    * seatNumber
+    * seatClass
+}
+
+Customer ||..|| Ticket
+Ticket }|..|| Flight
+@enduml

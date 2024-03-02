@@ -1,0 +1,7 @@
+@startuml
+Customer --> CallCenterAgent: Can I get a ticket
+CallCenterAgent --> TicketingSupervisor : Can I give this customer a discount
+TicketingSupervisor --> CallCenterAgent : Sure, if the customer asks for more than 4 tickets
+CallCenterAgent --> Customer : Sir, how many tickets do you want ? 
+
+@enduml

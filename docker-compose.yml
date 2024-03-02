@@ -1,0 +1,50 @@
+version: "3"
+
+networks:
+    airline-network:
+        driver: bridge
+        # external: true
+
+services:
+    airline-database-service:
+        build:
+            dockerfile: Dockerfile
+            context: ./airline-database
+
+        image: airline-database
+        container_name: airline-database-service
+
+        restart: always
+
+        environment:
+            - POSTGRES_USER=abhinn
+            - POSTGRES_PASSWORD=sarkar
+
+        ports:
+            - "5432:5432"
+
+        volumes:
+            - /Users/abhinnsarkar/Documents/Code/SelfLearning/airline/airline-database/data:/var/lib/postgresql/data
+        networks:
+            - airline-network
+
+    airline-backend-service:
+        build:
+            dockerfile: Dockerfile
+            context: ./airline-backend
+            args:
+                - DB_URL_ARG=jdbc:postgresql://airline-database-service:5432/airline
+                - DB_USER_ARG=abhinn
+                - DB_PASS_ARG=sarkar
+
+        image: airline-backend
+        container_name: airline-backend-service
+
+        ports:
+            - "80:8080"
+
+        networks:
+            - airline-network
+
+        depends_on:
+            - airline-database-service
