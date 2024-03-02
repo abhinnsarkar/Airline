@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = git@github.com:abhinnsarkar/airline-backend.git
+[submodule "database"]
+	path = database
+	url = git@github.com:abhinnsarkar/airline-database
