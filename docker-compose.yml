@@ -9,7 +9,7 @@ services:
     airline-database-service:
         build:
             dockerfile: Dockerfile
-            context: ./airline-database
+            context: ./database
 
         image: airline-database
         container_name: airline-database-service
@@ -24,14 +24,14 @@ services:
             - "5432:5432"
 
         volumes:
-            - /Users/abhinnsarkar/Documents/Code/SelfLearning/airline/airline-database/data:/var/lib/postgresql/data
+            - ./database/data:/var/lib/postgresql/data
         networks:
             - airline-network
 
     airline-backend-service:
         build:
             dockerfile: Dockerfile
-            context: ./airline-backend
+            context: ./backend
             args:
                 - DB_URL_ARG=jdbc:postgresql://airline-database-service:5432/airline
                 - DB_USER_ARG=abhinn
